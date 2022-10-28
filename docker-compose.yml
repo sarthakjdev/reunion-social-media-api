@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: reunion-ecommerce-api
+    build: ./
+    ports:
+      - 3000:3000
+    depends_on:
+      - "database"
+    env_file: './.env'
+    restart: always
+    command: sh -c "npm run db-migrate && npm run start"
+
+  database:
+    container_name: reunion-postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=reunion
+      - POSTGRES_DB=reunion
+      - POSTGRES_PASSWORD=reunion
+    volumes:
+      - dev-postgres-data:/var/lib/postressql/data 
+    ports:
+      - "5431:5432"
+  
+volumes:
+  dev-postgres-data:
