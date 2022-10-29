@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import messages from '@constants/messages'
-import UserFactory from '@factory/userFactory'
+import { UserFactory } from '@factory/userFactory'
 import { DecodedPayload } from 'src/interfaces/decodedPayload'
 import config from '../configs/config'
 /**
  * Is Authenticated
  */
-export default async function isAuthenticated(req: Request, res: Response, next: NextFunction): Promise<void | Response> {
+export default async function isAuthorized(req: Request, res: Response, next: NextFunction): Promise<void | Response> {
     try {
         const token = req.headers?.authorization?.split(' ')[1]
 

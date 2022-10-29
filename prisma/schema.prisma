@@ -10,24 +10,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model User {
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  name        String?
+  password    String
+  authToken   String?
+  posts       Post[]
+  comments    Comment[]
+  liked_posts LikeOnPost[]
+  followers   Follow[]     @relation("follower")
+  following   Follow[]     @relation("following")
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @default(now()) @updatedAt
 
   @@map("users")
 }
 
-model Posts {
-  id   Int     @id @default(autoincrement())
-  name String?
+model Follow {
+  follower_id  Int
+  follower     User @relation("follower", fields: [follower_id], references: [id])
+  following_id Int
+  following    User @relation("following", fields: [following_id], references: [id])
+
+  @@id([follower_id, following_id])
+  @@map("follow")
+}
+
+model Post {
+  id         Int          @id @default(autoincrement())
+  title      String?
+  desc       String?
+  user_id    Int
+  user       User         @relation(fields: [user_id], references: [id])
+  comments   Comment[]
+  liked_by   LikeOnPost[]
+  created_at DateTime     @default(now())
+  updated_at DateTime     @default(now()) @updatedAt
 
   @@map("posts")
 }
 
-model Comments {
-  id   Int     @id @default(autoincrement())
-  text String?
+model LikeOnPost {
+  user_id    Int
+  post_id    Int
+  user       User     @relation(fields: [user_id], references: [id])
+  post       Post     @relation(fields: [post_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@id([user_id, post_id])
+  @@map("likesonposts")
+}
+
+model Comment {
+  id      Int     @id @default(autoincrement())
+  text    String?
+  post_id Int
+  post    Post    @relation(fields: [post_id], references: [id])
+  user_id Int
+  user    User    @relation(fields: [user_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 
   @@map("comments")
 }
