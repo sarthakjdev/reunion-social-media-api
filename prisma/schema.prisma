@@ -29,9 +29,9 @@ model User {
 
 model Follow {
   follower_id  Int
-  follower     User @relation("follower", fields: [follower_id], references: [id])
+  follower     User @relation("following", fields: [follower_id], references: [id])
   following_id Int
-  following    User @relation("following", fields: [following_id], references: [id])
+  following    User @relation("follower", fields: [following_id], references: [id])
 
   @@id([follower_id, following_id])
   @@map("follow")
