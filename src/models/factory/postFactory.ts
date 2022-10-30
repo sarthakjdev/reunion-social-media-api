@@ -115,7 +115,8 @@ export class PostFactory {
      * @memberof PostFactory
      */
     static async deletePost(id: number): Promise<void> {
-        const post = await prisma.post.delete({
+
+        await prisma.post.delete({
             where: {
                 id
             }

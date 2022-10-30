@@ -12,7 +12,7 @@
     "dev:db-server": "npm run dev:db && npm run dev",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "db-migrate": "npx prisma generate && npx prisma migrate",
+    "db-migrate": "npx prisma generate && npx prisma migrate dev --name init",
     "db-generate": "npx prisma generate"
   },
   "author": "",

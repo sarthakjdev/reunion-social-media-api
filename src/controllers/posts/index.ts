@@ -56,10 +56,10 @@ export default class PostController {
      */
     static async createPost(req: Request, res: Response): Promise<Response> {
         try {
-            const { id } = req.params
-            if (!id) return res.status(400).send(messages.badReq)
-
-            const post = await PostFactory.getPost(Number(id))
+            const { title, desc } = req.body
+            if (!title || !desc) return res.status(400).send(messages.badReq)
+            const user = await retrieveUser(req)
+            const post = await PostFactory.createPost({title , desc, user_id: user.id } as any)
 
             if (!post) return res.status(404).send(messages.notFound)
 

@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "e7d5a3ad-030a-4899-95f4-5fee452a2162",
+		"name": "reunion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18065352"
+	},
+	"item": [
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "/post/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test('Status code is 200', function () {",
+									"    let id = pm.response.json().post.id",
+									"    pm.environment.set('POST_ID', `${id}`) ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "desc",
+									"value": "this is a test post from postman!",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/post/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/all_posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/post/all_posts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								"all_posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/post/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/like/:id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/post/like/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								"like",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/unlike/:id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/post/unlike/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								"unlike",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/comment/:id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "comment",
+									"value": "nice post",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/post/comment/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								"comment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/post/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/post/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{POST_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "/auth/authenicate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test('Status code is 200', function () {",
+									"    let token = pm.response.json().token",
+									"    pm.environment.set('AUTH_TOKEN', `${token}`) ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "dummy@email.co",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "00000000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "/user/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/unfollow/:id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/unfollow/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"unfollow",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/follow/:id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/follow/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"follow",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

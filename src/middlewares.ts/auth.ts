@@ -21,7 +21,6 @@ export default async function isAuthorized(req: Request, res: Response, next: Ne
 
         return res.status(400).send(messages.unauthorized_req)
     } catch (error) {
-        console.log('error ', error)
 
         return res.status(500).send(messages.serverError)
     }

@@ -25,12 +25,37 @@ export class UserFactory {
         return user
     }
 
+
+    /**
+     * create user
+     * @static
+     * @memberof UserFactory
+     */
+    static async createUser(userData): Promise<User> {
+        const user = await prisma.user.create({
+            data: {
+                ...userData,
+            },
+            include: {
+                _count: {
+                    select: {
+                        followers: true,
+                        following: true
+                    }
+                }
+            }
+        })
+
+        return user
+    }
+
+
     /**
      * Update auth token
      * @static
      * @memberof UserFactory
      */
-     static async updateAuthToken(user: User, token: string) {
+    static async updateAuthToken(user: User, token: string) {
         const dbUser = await prisma.user.update({
             where: {
                 email: user.email,
@@ -48,10 +73,10 @@ export class UserFactory {
      * @static
      * @memberof UserFactory
      */
-     static async followUser(followerId: number, followingId: number): Promise<Follow> {
+    static async followUser(followerId: number, followingId: number): Promise<Follow> {
         const follow = await prisma.follow.create({
             data: {
-                following_id: followingId ,
+                following_id: followingId,
                 follower_id: followerId
             },
         })
@@ -64,10 +89,10 @@ export class UserFactory {
      * @static
      * @memberof UserFactory
      */
-     static async unfollowUser(followerId: number, followingId: number): Promise<void> {
+    static async unfollowUser(followerId: number, followingId: number): Promise<void> {
         await prisma.follow.delete({
             where: {
-                follower_id_following_id: {follower_id: followerId, following_id: followingId}
+                follower_id_following_id: { follower_id: followerId, following_id: followingId }
             },
         })
     }

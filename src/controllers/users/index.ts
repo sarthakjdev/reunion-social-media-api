@@ -37,8 +37,8 @@ export default class UserController {
             if(!id) return res.status(400).send(messages.badReq)
 
             const user = await retrieveUser(req)
-
-            const follow = await UserFactory.followUser(Number(id), user.id)
+            
+            const follow = await UserFactory.followUser(user.id, Number(id))
 
             return res.status(200).json({
                 success: true,
@@ -61,7 +61,7 @@ export default class UserController {
 
             const user = await retrieveUser(req)
 
-            const follow = await UserFactory.unfollowUser(Number(id), user.id)
+            const follow = await UserFactory.unfollowUser(user.id, Number(id))
 
             return res.status(200).json({
                 success: true,

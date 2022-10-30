@@ -13,7 +13,7 @@ router.post('/', isAuthorized, PostController.createPost)
 /**
  * get all post of  user
  */
-router.delete('/all_posts', isAuthorized, PostController.getPostsOfUser)
+router.get('/all_posts', isAuthorized, PostController.getPostsOfUser)
 
 /**
  * get a post
@@ -23,21 +23,21 @@ router.get('/:id', isAuthorized, PostController.getPost)
 /**
  * like a post
  */
-router.put('/like/:id', isAuthorized, PostController.likePost)
+router.post('/like/:id', isAuthorized, PostController.likePost)
 
 /**
  * unliike a post
  */
-router.put('/unlike/:id', isAuthorized, PostController.unlikePost)
+router.post('/unlike/:id', isAuthorized, PostController.unlikePost)
 
 /**
 * comment a post
 */
-router.put('/comment/:id', isAuthorized, PostController.commentPost)
+router.post('/comment/:id', isAuthorized, PostController.commentPost)
 
 /**
 * delete post
 */
-router.delete('/delete/:id', isAuthorized, PostController.deletePost)
+router.delete('/:id', isAuthorized, PostController.deletePost)
 
 export default router

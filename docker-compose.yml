@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   api:
-    container_name: reunion-ecommerce-api
+    container_name: reunion-social-media-api
     build: ./
     ports:
       - 3000:3000
@@ -13,7 +13,6 @@ services:
     command: sh -c "npm run db-migrate && npm run start"
 
   database:
-    container_name: reunion-postgres
     image: postgres
     environment:
       - POSTGRES_USER=reunion
@@ -22,7 +21,9 @@ services:
     volumes:
       - dev-postgres-data:/var/lib/postressql/data 
     ports:
-      - "5431:5432"
+      - "5432:5432"
+    restart: always
+    
   
 volumes:
   dev-postgres-data:
