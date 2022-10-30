@@ -18,4 +18,6 @@ ENV JWT_SECRET_KEY ${JWT_SECRET_KEY}
 
 EXPOSE 3000
 
+RUN npm run db-migrate
+
 CMD ["npm", "start"]

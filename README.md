@@ -15,6 +15,12 @@ Develop a social media REST API, with given endpoints.
 5. Prisma (ORM)
 6. Docker
 
+
+## Solution
+
+[Github](https://github.com/sarthakjdev/reunion-social-media-api)
+Deployed [link](https://reunion-social-media-api.onrender.com/)
+
  ## Setup in your environment
 
  NOTE: Make sure you have docker and docker-compose installed in your system.
