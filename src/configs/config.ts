@@ -4,7 +4,7 @@ import * as fs from 'fs';
 
 // Parsing the env file
 let envFilePath
-envFilePath = fs.existsSync(path.resolve(__dirname, '../../.env'))? path.resolve(__dirname, '../../.env') :  path.resolve('/etc/secrets/.env')
+envFilePath = fs.existsSync(path.resolve(__dirname, '../../.env')) ? path.resolve(__dirname, '../../.env') : path.resolve('/etc/secrets/.env')
 dotenv.config({ path: envFilePath })
 
 // interface for env file
