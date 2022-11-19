@@ -76,3 +76,7 @@ model Comment {
 
   @@map("comments")
 }
+
+
+
+

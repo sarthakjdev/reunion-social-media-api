@@ -30,6 +30,6 @@
     "ts-node": {
         "files": true
     },
-    "include": ["src", "./*.ts", "prod-paths.js", "*.env"],
+    "include": ["src/*", "./*.ts", "prod-paths.js", "*.env"],
     "exclude": ["node_modules", "dist"]
 }

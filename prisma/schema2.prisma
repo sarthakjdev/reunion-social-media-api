@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        String    @id
+    name      String
+    email     String
+    password  String
+    catalog   Catalogs? @relation(fields: [catalogsId], references: [id])
+    user_type USER_TYPE
+
+    catalogsId String?
+    Orders     Orders[]
+
+}
+
+model Orders {
+    id        String @id
+    buyer_id  String
+    seller_id String
+    buyer     User?  @relation("buyer", references: [id], fields: [buyer_id])
+    seller    User?  @relation("seller", fields: [seller_id], references: [id])
+    userId    String
+    User      User   @relation(fields: [userId], references: [id])
+}
+
+model Catalogs {
+    id       String          @id
+    name     String
+    products ProdutCatalog[]
+    User     User
+}
+
+model Products {
+    id       String          @id
+    name     String
+    price    Int
+    colours  COLORS
+    catalogs ProdutCatalog[]
+}
+
+model ProdutCatalog {
+    product_id String
+    product    Products @relation(references: [id], fields: [product_id])
+    catalog_id String
+    catalog    Catalogs @relation(references: [id], fields: [catalog_id])
+    quantity Int
+
+    @@id([product_id, catalog_id])
+}
+
+enum USER_TYPE {
+    SELLER
+    CONSUMER
+}
+
+enum COLORS {
+    RED
+    GREEN
+    BLACK
+}
+
+

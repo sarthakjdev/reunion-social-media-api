@@ -1,6 +1,6 @@
 import messages from "@constants/messages";
 import { UserFactory } from "@factory/index";
-import retrieveUser from "@helpers/authHelpers";
+import {retrieveUser} from "@helpers/authHelpers";
 import { Request, Response } from "express";
 
 export default class UserController {
@@ -37,7 +37,7 @@ export default class UserController {
             if(!id) return res.status(400).send(messages.badReq)
 
             const user = await retrieveUser(req)
-            
+
             const follow = await UserFactory.followUser(user.id, Number(id))
 
             return res.status(200).json({
